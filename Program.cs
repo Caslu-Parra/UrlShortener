@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using MySqlX.XDevAPI.Common;
-using Org.BouncyCastle.Asn1.Ocsp;
 using Renci.SshNet.Messages;
 using UrlShortener.Database;
 using UrlShortener.Models;
@@ -24,8 +23,8 @@ if (app.Environment.IsDevelopment())
 app.MapGet("/", () => "Welcome to Parra's Url Shortener");
 
 app.MapGet("/addresses", async (DbConnection db) => await db.Addresses.ToListAsync());
-app.MapGet("/addresses/{key}", async (string key, DbConnection db) => await db.Addresses.FindAsync(key));
 
+app.MapGet("/addresses/{key}", async (string key, DbConnection db) => await db.Addresses.FindAsync(key));
 
 app.MapGet("/{key}", async (string key, DbConnection db) =>
     {
@@ -36,16 +35,14 @@ app.MapGet("/{key}", async (string key, DbConnection db) =>
 
 app.MapPost("/create", async (string url, DbConnection db) =>
 {
-    Address address = await db.Addresses.FirstAsync(x => x.Url == url);
-    if (address is not null)  return TypedResults.Conflict(
-        new { Message = $"The URL -> '{url}' is alredy in use. It's shortned by '{address.Shortned}'" });
-
+    Address? address = await db.Addresses.FirstOrDefaultAsync(x => x.Url == url);
+    if (address is not null) return Results.Conflict(address);
 
     string shortned = string.Empty;
     do
     {
         var letters = new List<string> { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-     "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+        "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
         var numers = new List<string> { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
         var random = new Random();
 
@@ -68,7 +65,7 @@ app.MapPost("/create", async (string url, DbConnection db) =>
     await db.Addresses.AddAsync(address);
     await db.SaveChangesAsync();
 
-    return Results.Redirect($"/addresses/{address.Shortned}");
+    return Results.Created($"/addresses/{address.Shortned}", address);
 });
 
 
