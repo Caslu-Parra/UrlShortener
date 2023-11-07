@@ -1,3 +1,3 @@
 # UrlShortener
 
-This is a simple Web API that shortens a full URL into four characters.
+This is a simple Web API that shortens a full URL into a string with four characters.
