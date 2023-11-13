@@ -14,4 +14,4 @@
 > Some demonstrations here... 
 
 ## [Access the app](#access-the-app)
-> The application is available in Azure Cloud at this address :point_right: https://SomeAzureLinkHere
+> The application is available in Azure Cloud at this address :point_right: https://urlshorter.azurewebsites.net/

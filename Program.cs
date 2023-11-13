@@ -1,9 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using MySqlX.XDevAPI.Common;
-using Renci.SshNet.Messages;
 using UrlShortener.Database;
-using UrlShortener.Models;
 using UrlShortener.Routes;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,11 +11,9 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.MapGet("/", () => "Welcome to Parra's Url Shortener");
 
