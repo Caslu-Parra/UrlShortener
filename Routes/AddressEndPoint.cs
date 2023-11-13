@@ -43,7 +43,11 @@ namespace UrlShortener.Routes
 
             app.MapGet("/addresses", async (DbConnection db) => await db.Addresses.ToListAsync());
 
-            app.MapGet("/addresses/{key}", async (string key, DbConnection db) => await db.Addresses.FindAsync(key));
+            app.MapGet("/addresses/{key}", async (string key, DbConnection db) =>
+            {
+                Address? address = await db.Addresses.FindAsync(key);
+                return address is null ? Results.NotFound(address) : Results.Ok(address);
+            });
 
             app.MapPost("/create", async (string url, DbConnection db) =>
             {
