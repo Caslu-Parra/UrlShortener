@@ -9,7 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 Uri azKey = new Uri(builder.Configuration.GetSection("KeyVaultURL").Value!);
-var azCredential = new DefaultAzureCredential(true);
+var azCredential = new DefaultAzureCredential();
 builder.Configuration.AddAzureKeyVault(azKey, azCredential);
 
 var cs = builder.Configuration.GetSection("dbcon").Value;
