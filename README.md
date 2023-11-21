@@ -9,3 +9,7 @@
 
 ## [Project Description](#project-description)
  UrlShorterner is a web API that simply receives a link an then shortens it into a four characters string
+ 
+## [Existing Routes](#existing-routes)
+
+![image](https://github.com/Caslu-Parra/UrlShortener/assets/80491085/301cd6a2-b566-4247-a344-2d77f2b775e4)
