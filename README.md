@@ -9,9 +9,3 @@
 
 ## [Project Description](#project-description)
  UrlShorterner is a web API that simply receives a link an then shortens it into a four characters string
-
-## [App Demonstration](#app-demonstration)
-> Some demonstrations here... 
-
-## [Access the app](#access-the-app)
-> The application is available in Azure Cloud at this address :point_right: https://urlshorter.azurewebsites.net/
