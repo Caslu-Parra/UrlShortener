@@ -1,4 +1,3 @@
-using Azure.Identity;
 using Microsoft.EntityFrameworkCore;
 using UrlShortener.Database;
 using UrlShortener.Routes;
@@ -18,8 +17,6 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapGet("/", () => "Welcome to Parra's Url Shortener");
-
-AddressEndPoint.MapRoutes(app);
+app.MapAddresesRoutes();
 
 app.Run();
