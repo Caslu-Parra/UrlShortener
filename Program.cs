@@ -8,9 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo
 {
-    Title = "Encurtador de URL do Parra",
+    Title = "Parra's URL Shortener",
     Version = "v1",
-    Description = "Esta API encurta uma URL longa para um novo endereço de 4 caracteres"
+    Description = "UrlShorterner is a web API that receives a webpage URL and then shortens it into a four characters string"
 }));
 
 var cs = builder.Configuration.GetSection("DbConn").Value;
@@ -28,7 +28,7 @@ app.UseSwaggerUI(c =>
 });
 
 app.MapGroup("addresses")
-   .WithTags("Endereços")
+   .WithTags("Addresses")
    .MapAddresesRoutes();
 
 app.Run();

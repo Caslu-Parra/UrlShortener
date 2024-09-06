@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 using UrlShortener.Database;
 using UrlShortener.Models;
 
@@ -32,10 +33,12 @@ namespace UrlShortener.Routes
                 return address is null ? Results.NotFound("Endereço não encontrado") : Results.Redirect(address.Url, true);
             })
             .Produces<string>(StatusCodes.Status404NotFound)
-            .Produces(StatusCodes.Status301MovedPermanently);
+            .Produces(StatusCodes.Status301MovedPermanently)
+            .WithDescription("Redirects you to a specific website through a relation beetween shortned(key) - URL");
 
             app.MapGet("/", async (DbConnection db) => await db.Addresses.ToListAsync())
-            .Produces<List<Address>>(StatusCodes.Status200OK);
+            .Produces<List<Address>>(StatusCodes.Status200OK)
+            .WithDescription("Show all existing relations beetween shortned(key) - URL");
 
             app.MapDelete("/delete/{key}", async (string key, DbConnection db) =>
             {
@@ -49,7 +52,8 @@ namespace UrlShortener.Routes
                 return Results.Accepted();
             })
             .Produces(StatusCodes.Status202Accepted)
-            .Produces<string>(StatusCodes.Status404NotFound);
+            .Produces<string>(StatusCodes.Status404NotFound)
+            .WithDescription("Delete a specific relation beetween shortned(key) - URL");
 
             app.MapPost("/create", async (string url, DbConnection db) =>
             {
@@ -73,7 +77,8 @@ namespace UrlShortener.Routes
 
             })
             .Produces<Address>(StatusCodes.Status201Created)
-            .Produces<string>(StatusCodes.Status400BadRequest);
+            .Produces<string>(StatusCodes.Status400BadRequest)
+            .WithDescription("Create a new shortned website URL");
         }
     }
 }
