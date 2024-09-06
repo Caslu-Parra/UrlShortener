@@ -1,4 +1,4 @@
-# UrlShortener
+﻿# UrlShortener
 
 <p align="center">
   <img src="https://img.shields.io/static/v1?label=&message=asp.net%20minimal%20api&color=blue&style=for-the-badge&logo=dotnet"/>
@@ -10,6 +10,5 @@
 ## [Project Description](#project-description)
  UrlShorterner is a web API that simply receives a link an then shortens it into a four characters string
  
-## [Existing Routes](#existing-routes)
-
-![image](https://github.com/Caslu-Parra/UrlShortener/assets/80491085/301cd6a2-b566-4247-a344-2d77f2b775e4)
+## [Project Usage](#project-usage)
+ 🌐 Project is hosted at [Render](https://render.com/) servers, click [here](https://urlshortener-nilc.onrender.com/) to check.
