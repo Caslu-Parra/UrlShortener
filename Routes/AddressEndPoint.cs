@@ -34,10 +34,10 @@ namespace UrlShortener.Routes
             .Produces<string>(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status301MovedPermanently);
 
-            app.MapGet("/addresses", async (DbConnection db) => await db.Addresses.ToListAsync())
+            app.MapGet("/", async (DbConnection db) => await db.Addresses.ToListAsync())
             .Produces<List<Address>>(StatusCodes.Status200OK);
 
-            app.MapDelete("/addresses/delete/{key}", async (string key, DbConnection db) =>
+            app.MapDelete("/delete/{key}", async (string key, DbConnection db) =>
             {
                 Address? address = await db.Addresses.FindAsync(key);
 
@@ -51,7 +51,7 @@ namespace UrlShortener.Routes
             .Produces(StatusCodes.Status202Accepted)
             .Produces<string>(StatusCodes.Status404NotFound);
 
-            app.MapPost("/addresses/create", async (string url, DbConnection db) =>
+            app.MapPost("/create", async (string url, DbConnection db) =>
             {
                 if (!Uri.IsWellFormedUriString(url, UriKind.Absolute)) return Results.BadRequest("URL inválida.");
 
